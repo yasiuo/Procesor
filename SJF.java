@@ -28,4 +28,9 @@ public class SJF extends Algorytm {
         }
         return null;
     }
+
+    @Override
+    public Boolean czyZawlaszcza() {
+        return false;
+    }
 }

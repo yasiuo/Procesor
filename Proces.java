@@ -34,4 +34,8 @@ public class Proces {
     public int getCzas_oczekiwania() {
         return czas_oczekiwania;
     }
+
+    public void zmniejszDlugosc_fazy_proc(int kwant) {
+        this.dlugosc_fazy_proc -= kwant;
+    }
 }
