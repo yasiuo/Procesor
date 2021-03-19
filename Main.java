@@ -1,6 +1,8 @@
 package Szlachetna;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 
 public class Main {
 
@@ -11,17 +13,27 @@ public class Main {
         int czasSJF = 0;
         int czasRR = 0;
 
-        int ileSerii = 50;
+        int ileSerii = 10;
 
         for (int i=0;i<ileSerii;i++) {
-            ArrayList<Proces> test1 = generator(50);
-            Procesor doFCFS = new Procesor(new ArrayList<>(test1), new FCFS(), 0);
-            Procesor doSJF = new Procesor(new ArrayList<>(test1), new SJF(), 0);
+            ArrayList<Proces> listaProcesow = generator(15);
+            ArrayList<Proces> lista1 = kopiarka(listaProcesow);
+            ArrayList<Proces> lista2 = kopiarka(listaProcesow);
+            ArrayList<Proces> lista3 = kopiarka(listaProcesow);
 
-            Procesor doRR = new Procesor(new ArrayList<>(test1), new RoundRobin(), 5);
+            //for (Proces x : test1) System.out.println(x.toString());
 
+            Procesor doFCFS = new Procesor(lista1, new FCFS(), 0);
             czasFCFS+=doFCFS.getSredniCzas();
+
+            System.out.println("!!!!!!!!!!!!!!!!!!!!!!");
+
+            Procesor doSJF = new Procesor(lista2, new SJF(), 0);
             czasSJF+=doSJF.getSredniCzas();
+
+            System.out.println("!!!!!!!!!!!!!!!!!!!!!!");
+
+            Procesor doRR = new Procesor(lista3, new RoundRobin(), 5);
             czasRR+=doRR.getSredniCzas();
         }
         System.out.println("Sredni czas FCFS: " + czasFCFS/ileSerii);
@@ -33,5 +45,13 @@ public class Main {
         ArrayList<Proces> procesy = new ArrayList<>();
         for (int i =0;i<dlugosc;i++) procesy.add(new Proces(i));
         return procesy;
+    }
+
+    public static ArrayList<Proces> kopiarka(ArrayList<Proces> wejscie){
+        ArrayList<Proces> wyjscie = new ArrayList<>();
+        for (Proces x : wejscie){
+            wyjscie.add(new Proces(x.getDlugosc_fazy_proc(),x.getCzas_przybycia(),x.getID()));
+        }
+        return wyjscie;
     }
 }
