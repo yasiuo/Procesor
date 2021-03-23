@@ -21,9 +21,9 @@ public class Proces {
     public Proces(int ID) {
         Random random = new Random();
         this.czas_oczekiwania = 0;
-        this.dlugosc_fazy_proc = random.nextInt(100);
+        this.dlugosc_fazy_proc = random.nextInt(200)+50;
         this.ID = ID;
-        this.czas_przybycia=random.nextInt(20)+ID*random.nextInt(2);
+        this.czas_przybycia=random.nextInt(50)+ID*50;
     }
 
     public Proces( int dlugosc_fazy_proc, int czas_przybycia, int ID) {

@@ -3,19 +3,15 @@ package Szlachetna;
 import java.util.ArrayList;
 
 public class Procesor {
-    ArrayList<Proces> procesy;
     ArrayList<Proces> procesy_wykonane;
     Algorytm algorytm;
-    int kwant;
     int czas_Sredni;
 
-    public Procesor(ArrayList<Proces> procesy, Algorytm algorytm, int kwant) {
-        this.procesy = procesy;
+    public Procesor(Algorytm algorytm) {
         this.algorytm = algorytm;
-        this.procesy_wykonane = new ArrayList<>();
-        this.kwant=kwant;
 
-        algorytm.przerob(procesy,procesy_wykonane,kwant);
+        algorytm.przerob();
+        this.procesy_wykonane = algorytm.getProcesy_wykonane();
         SredniCzas();
         //wyswietlSredniCzas();
     }
@@ -53,12 +49,12 @@ public class Procesor {
 //    }
 
 
-        public void wyswietl () {
-            System.out.println("kolejka:");
-            for (Proces x : procesy) System.out.println(x.toString());
-            System.out.println("wykonane:");
-            for (Proces x : procesy_wykonane) System.out.println(x.toString());
-        }
+//        public void wyswietl () {
+//            System.out.println("kolejka:");
+//            for (Proces x : procesy) System.out.println(x.toString());
+//            System.out.println("wykonane:");
+//            for (Proces x : procesy_wykonane) System.out.println(x.toString());
+//        }
 
         public void wyswietlSredniCzas () {
             System.out.println("Sredni czas oczekiwania dla " + algorytm.getClass().getSimpleName() + " wynosi: " + czas_Sredni);

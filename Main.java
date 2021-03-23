@@ -13,7 +13,7 @@ public class Main {
         int czasSJF = 0;
         int czasRR = 0;
 
-        int ileSerii = 200;
+        int ileSerii = 100;
 
         for (int i=0;i<ileSerii;i++) {
             ArrayList<Proces> listaProcesow = generator(100);
@@ -23,17 +23,17 @@ public class Main {
 
             //for (Proces x : listaProcesow) System.out.println(x.toString());
 
-            Procesor doFCFS = new Procesor(lista1, new FCFS(), 0);
+            Procesor doFCFS = new Procesor(new FCFS(lista1, 0));
             czasFCFS+=doFCFS.getSredniCzas();
 
             //System.out.println("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
 
-            Procesor doSJF = new Procesor(lista2, new SJF(), 0);
+            Procesor doSJF = new Procesor(new SJF(lista2, 0));
             czasSJF+=doSJF.getSredniCzas();
 //
 //            System.out.println("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
 //
-            Procesor doRR = new Procesor(lista3, new RoundRobin(), 1);
+            Procesor doRR = new Procesor(new RoundRobin(lista3, 250));
             czasRR+=doRR.getSredniCzas();
         }
         System.out.println("Sredni czas FCFS: " + czasFCFS/ileSerii);

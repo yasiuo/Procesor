@@ -4,11 +4,16 @@ import java.util.ArrayList;
 
 public class SJF extends Algorytm {
 
+
+    public SJF(ArrayList<Proces> procesy, int kwant) {
+        super(procesy, kwant);
+    }
+
     @Override
-    public void przerob(ArrayList<Proces> procesy, ArrayList<Proces> procesy_wykonane, int kwant) {
-        posortuj(procesy);
+    public void przerob() {
+        posortuj();
         Proces nastepny = procesy.get(0);
-        wykonaj(procesy,nastepny,procesy_wykonane);
+        wykonaj(nastepny);
 
         ArrayList<Integer> czasy = new ArrayList<>();
         for (Proces x : procesy){
@@ -29,16 +34,24 @@ public class SJF extends Algorytm {
         }
         while (true) {
             if (procesy.isEmpty()) break;
-            label:
             for (int i = 0; i < czasy.size(); i++) {
+                label1:
                 for (int j = 0; j < procesy.size(); j++) {
                     if (procesy.get(j).getDlugosc_fazy_proc() == czasy.get(i)) {
                         nastepny = procesy.get(j);
-                        break label;
+                        if(nastepny.getCzas_przybycia()==0) wykonaj(nastepny);
+                        else break label1;
                     }
                 }
             }
-            wykonaj(procesy, nastepny, procesy_wykonane);
+            test:
+            while (true) {
+                if (procesy.isEmpty()) break test;
+                for (Proces x : procesy) {
+                    if (x.getCzas_przybycia() == 0) break test;
+                }
+                odswiez(1);
+            }
         }
     }
 

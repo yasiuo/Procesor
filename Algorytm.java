@@ -3,10 +3,19 @@ package Szlachetna;
 import java.util.ArrayList;
 
 public abstract class Algorytm {
+    ArrayList<Proces> procesy;
+    ArrayList<Proces> procesy_wykonane;
+    int kwant;
 
-    public abstract void przerob(ArrayList<Proces> procesy, ArrayList<Proces> procesy_wykonane, int kwant);
+    public Algorytm(ArrayList<Proces> procesy, int kwant) {
+        this.procesy = procesy;
+        this.procesy_wykonane = new ArrayList<>();
+        this.kwant = kwant;
+    }
 
-    public void odswiez (int czas, ArrayList<Proces> procesy) {
+    public abstract void przerob();
+
+    public void odswiez (int czas) {
         for (Proces x : procesy) {
             if (x.getCzas_przybycia() > 0) {
                 label:
@@ -15,13 +24,13 @@ public abstract class Algorytm {
                         x.dodCzas_oczekiwania(czas2);
                         break label;
                     }
-                    x.zmniejszCzas_przybycia(1);
+                    else x.zmniejszCzas_przybycia(1);
                 }
             }
             else x.dodCzas_oczekiwania(czas);
         }
     }
-    public void posortuj(ArrayList<Proces> procesy){
+    public void posortuj(){
         boolean t = true;
         while (t) {
             t = false;
@@ -37,14 +46,18 @@ public abstract class Algorytm {
         }
     }
 
-    public void wykonaj(ArrayList<Proces> procesy,Proces nastepny,ArrayList<Proces> procesy_wykonane){
+    public void wykonaj(Proces nastepny){
         if (nastepny.getCzas_przybycia()>0) {
-            odswiez(nastepny.getCzas_przybycia(), procesy);
+            odswiez(nastepny.getCzas_przybycia());
         }
 
-        odswiez(nastepny.getDlugosc_fazy_proc(),procesy);
+        odswiez(nastepny.getDlugosc_fazy_proc());
         nastepny.dodCzas_oczekiwania(-nastepny.getDlugosc_fazy_proc());
         procesy.remove(nastepny);
         procesy_wykonane.add(nastepny);
+    }
+
+    public ArrayList<Proces> getProcesy_wykonane() {
+        return procesy_wykonane;
     }
 }
