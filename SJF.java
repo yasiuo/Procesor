@@ -5,8 +5,8 @@ import java.util.ArrayList;
 public class SJF extends Algorytm {
 
 
-    public SJF(ArrayList<Proces> procesy, int kwant) {
-        super(procesy, kwant);
+    public SJF(ArrayList<Proces> procesy) {
+        super(procesy);
     }
 
     @Override

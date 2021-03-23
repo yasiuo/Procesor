@@ -5,12 +5,10 @@ import java.util.ArrayList;
 public abstract class Algorytm {
     ArrayList<Proces> procesy;
     ArrayList<Proces> procesy_wykonane;
-    int kwant;
 
-    public Algorytm(ArrayList<Proces> procesy, int kwant) {
+    public Algorytm(ArrayList<Proces> procesy) {
         this.procesy = procesy;
         this.procesy_wykonane = new ArrayList<>();
-        this.kwant = kwant;
     }
 
     public abstract void przerob();

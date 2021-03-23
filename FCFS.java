@@ -5,8 +5,8 @@ import java.util.ArrayList;
 public class FCFS extends Algorytm {
 
 
-    public FCFS(ArrayList<Proces> procesy, int kwant) {
-        super(procesy, kwant);
+    public FCFS(ArrayList<Proces> procesy) {
+        super(procesy);
     }
 
     @Override
